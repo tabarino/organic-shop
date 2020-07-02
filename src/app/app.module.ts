@@ -6,10 +6,12 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        BsNavbarComponent
     ],
     imports: [
         BrowserModule,
