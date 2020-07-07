@@ -8,9 +8,7 @@ import * as firebase from 'firebase';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    constructor(
-        private afAuth: AngularFireAuth
-    ) {
+    constructor(private afAuth: AngularFireAuth) {
     }
 
     ngOnInit(): void {
