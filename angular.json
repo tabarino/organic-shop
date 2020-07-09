@@ -26,7 +26,18 @@
                         "styles": [
                             "src/styles.css"
                         ],
-                        "scripts": []
+                        "scripts": [],
+                        "allowedCommonJsDependencies": [
+                            "firebase",
+                            "@firebase/app",
+                            "@firebase/firestore",
+                            "@firebase/database",
+                            "@firebase/functions",
+                            "@firebase/performance",
+                            "@firebase/remote-config",
+                            "@firebase/component",
+                            "@firebase/util"
+                        ]
                     },
                     "configurations": {
                         "production": {
