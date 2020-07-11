@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
-import { first, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AppUser } from '../models/app-user';
 import { Observable } from 'rxjs';
 
@@ -19,8 +19,7 @@ export class UserService {
                     id: snap.payload.id,
                     ...snap.payload.data() as AppUser
                 };
-            }),
-            first()
+            })
         );
     }
 
