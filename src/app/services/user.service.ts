@@ -16,6 +16,7 @@ export class UserService {
         return this.db.collection('users').doc(uid).snapshotChanges().pipe(
             map(snap => {
                 return {
+                    id: snap.payload.id,
                     ...snap.payload.data() as AppUser
                 };
             }),
