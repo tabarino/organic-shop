@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
     selector: 'app-root',
@@ -10,11 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AppComponent {
     constructor(
         private authService: AuthService,
+        private userService: UserService,
         private route: ActivatedRoute,
         private router: Router
     ) {
         authService.user$.subscribe(user => {
             if (user) {
+                userService.save(user);
                 const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
                 this.router.navigateByUrl(returnUrl);
             }
