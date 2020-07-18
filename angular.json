@@ -36,7 +36,13 @@
                             "@firebase/performance",
                             "@firebase/remote-config",
                             "@firebase/component",
-                            "@firebase/util"
+                            "@firebase/util",
+                            "ng2-validation",
+                            "babel-runtime/helpers/extends",
+                            "babel-runtime/helpers/slicedToArray",
+                            "babel-runtime/helpers/createClass",
+                            "babel-runtime/core-js/get-iterator",
+                            "core-js/library/fn/get-iterator"
                         ]
                     },
                     "configurations": {
