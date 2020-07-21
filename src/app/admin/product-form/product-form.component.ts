@@ -3,6 +3,7 @@ import { CategoryService } from '../../services/category.service';
 import { Observable } from 'rxjs';
 import { Category } from '../../models/category';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-product-form',
@@ -13,6 +14,7 @@ export class ProductFormComponent implements OnInit {
     categories$: Observable<Category[]>;
 
     constructor(
+        private router: Router,
         private categoryService: CategoryService,
         private productService: ProductService
     ) {
@@ -24,5 +26,6 @@ export class ProductFormComponent implements OnInit {
 
     save(product): void {
         this.productService.add(product);
+        this.router.navigate(['/admin/products']);
     }
 }
