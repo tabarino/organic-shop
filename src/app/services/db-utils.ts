@@ -6,3 +6,7 @@ export function convertSnaps<T>(snaps): T[] {
         };
     });
 }
+
+export function convertSnapsDoc<T>(snaps): T {
+    return snaps.payload.data();
+}
