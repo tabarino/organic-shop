@@ -13,6 +13,7 @@ import { Product } from '../../models/product';
 })
 export class ProductFormComponent implements OnInit {
     categories$: Observable<Category[]>;
+    productId: string;
     product: Product = {
         id: null,
         title: null,
@@ -29,9 +30,9 @@ export class ProductFormComponent implements OnInit {
     ) {
         this.categories$ = this.categoryService.getCategories();
 
-        const productId = this.route.snapshot.paramMap.get('id');
-        if (productId) {
-            this.productService.getById(productId).subscribe(product => this.product = product);
+        this.productId = this.route.snapshot.paramMap.get('id');
+        if (this.productId) {
+            this.productService.getById(this.productId).subscribe(product => this.product = product);
         }
     }
 
@@ -39,7 +40,12 @@ export class ProductFormComponent implements OnInit {
     }
 
     save(product): void {
-        this.productService.add(product);
+        if (this.productId) {
+            this.productService.update(this.productId, product);
+        } else {
+            this.productService.add(product);
+        }
+
         this.router.navigate(['/admin/products']);
     }
 }
