@@ -41,4 +41,8 @@ export class ProductService {
     update(productId: string, product: Product): void {
         this.db.doc(`products/${ productId }`).update(product);
     }
+
+    delete(productId: string): void {
+        this.db.doc(`products/${productId}`).delete();
+    }
 }
