@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { convertSnaps, convertSnapsDoc } from './db-utils';
-import { first, map, take } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -26,8 +26,7 @@ export class ProductService {
         return this.db.collection(
             'products', ref => ref.orderBy('title')
         ).snapshotChanges().pipe(
-            map(snaps => convertSnaps<Product>(snaps)),
-            take(2)
+            map(snaps => convertSnaps<Product>(snaps))
         );
     }
 
