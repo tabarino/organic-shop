@@ -1,4 +1,17 @@
 .card {
     margin: 32px 0 0 50px;
-    width: 18.5rem;
+    width: 15rem;
+}
+
+.card-footer {
+    padding: 0;
+}
+
+.card-img-top {
+    height: 150px;
+}
+
+.btn {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
