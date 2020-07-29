@@ -22,6 +22,10 @@ export class AppComponent {
                     userService.save(user);
                     const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
 
+                    if (!returnUrl) {
+                        return;
+                    }
+
                     if (returnUrl.includes('admin')) {
                         this.router.navigateByUrl('/');
                     } else {
