@@ -5,6 +5,7 @@ import { Product } from '../models/product';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category';
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-products',
@@ -26,9 +27,12 @@ export class ProductsComponent implements OnInit {
 
     ngOnInit(): void {
         this.categories$ = this.categoryService.getAll();
-        this.productService.getAll().subscribe(products => this.products = products);
-
-        this.route.queryParamMap.subscribe(params => {
+        this.productService.getAll().pipe(
+            switchMap(products => {
+                this.products = products;
+                return this.route.queryParamMap;
+            }),
+        ).subscribe(params => {
             this.categoryId = params.get('categoryId');
 
             if (this.categoryId) {
