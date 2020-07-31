@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/product';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
     selector: 'product-card',
@@ -13,9 +14,22 @@ export class ProductCardComponent implements OnInit {
     @Input()
     showActions = true;
 
-    constructor() {
+    constructor(private shoppingCartService: ShoppingCartService) {
     }
 
     ngOnInit(): void {
+    }
+
+    addToCart(product: Product): void {
+        const cartId = localStorage.getItem('cartId');
+        if (!cartId) {
+            this.shoppingCartService.add().then(result => {
+                localStorage.setItem('cartId', result.id);
+
+                // Add Product to Cart
+            });
+        } else {
+            // Add Product to Cart
+        }
     }
 }
