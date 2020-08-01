@@ -4,6 +4,7 @@ import { Product } from '../models/product';
 import { first, map } from 'rxjs/operators';
 import { convertSnapsDoc } from './db-utils';
 import { ShoppingCartItem } from '../models/shopping-cart-item';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -14,20 +15,16 @@ export class ShoppingCartService {
 
     async addToCart(product: Product): Promise<void> {
         const cartId = await this.getOrCreateCartId();
-        this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).snapshotChanges().pipe(
-            map(snaps => convertSnapsDoc<ShoppingCartItem>(snaps)),
-            first()
-        ).subscribe(item => {
-            if (!item) {
-                this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).set({
-                    product,
-                    quantity: 1
-                });
-                return;
+        const item$ = this.getCartItem(cartId, product.id);
+        item$.subscribe(item => {
+            let quantity = 1;
+            if (item) {
+                quantity = item.quantity + 1;
             }
 
-            this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).update({
-                quantity: item.quantity + 1
+            this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).set({
+                product,
+                quantity
             });
         });
     }
@@ -46,5 +43,12 @@ export class ShoppingCartService {
 
     private create(): Promise<any> {
         return this.db.collection('shopping-carts').add({ dateCreated: new Date().getTime() });
+    }
+
+    private getCartItem(cartId: string, productId: string): Observable<ShoppingCartItem> {
+        return this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(productId).snapshotChanges().pipe(
+            map(snaps => convertSnapsDoc<ShoppingCartItem>(snaps)),
+            first()
+        );
     }
 }
