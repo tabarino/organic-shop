@@ -1,42 +1,50 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Product } from '../models/product';
 import { first, map } from 'rxjs/operators';
 import { convertSnapsDoc } from './db-utils';
-import { ShoppingCart } from '../models/shopping-cart';
+import { ShoppingCartItem } from '../models/shopping-cart-item';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ShoppingCartService {
-    shoppingCart: ShoppingCart = {
-        id: null,
-        dateCreated: null
-    };
-
     constructor(private db: AngularFirestore) {
     }
 
-    private async getOrCreateCart(): Promise<Observable<ShoppingCart>> {
-        const cartId = localStorage.getItem('cartId');
-        if (!cartId) {
-            const result = await this.create();
-            localStorage.setItem('cartId', result.id);
-            return this.getCart(result.id);
-        }
+    async addToCart(product: Product): Promise<void> {
+        const cartId = await this.getOrCreateCartId();
+        this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).snapshotChanges().pipe(
+            map(snaps => convertSnapsDoc<ShoppingCartItem>(snaps)),
+            first()
+        ).subscribe(item => {
+            if (!item) {
+                this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).set({
+                    product,
+                    quantity: 1
+                });
+                return;
+            }
 
-        return this.getCart(cartId);
+            this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).update({
+                quantity: item.quantity + 1
+            });
+        });
     }
 
-    private getCart(cartId: string): Observable<ShoppingCart> {
-        return this.db.doc(`products/${cartId}`).snapshotChanges().pipe(
-            map(snaps => convertSnapsDoc<ShoppingCart>(snaps)),
-            first()
-        );
+    private async getOrCreateCartId(): Promise<string> {
+        const cartId = localStorage.getItem('cartId');
+
+        if (cartId) {
+            return cartId;
+        }
+
+        const result = await this.create();
+        localStorage.setItem('cartId', result.id);
+        return result.id;
     }
 
     private create(): Promise<any> {
-        this.shoppingCart.dateCreated = new Date().getTime();
-        return this.db.collection('shopping-carts').add(this.shoppingCart);
+        return this.db.collection('shopping-carts').add({ dateCreated: new Date().getTime() });
     }
 }

@@ -21,6 +21,6 @@ export class ProductCardComponent implements OnInit {
     }
 
     addToCart(product: Product): void {
-
+        this.cartService.addToCart(product);
     }
 }
