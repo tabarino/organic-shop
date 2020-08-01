@@ -14,22 +14,13 @@ export class ProductCardComponent implements OnInit {
     @Input()
     showActions = true;
 
-    constructor(private shoppingCartService: ShoppingCartService) {
+    constructor(private cartService: ShoppingCartService) {
     }
 
     ngOnInit(): void {
     }
 
     addToCart(product: Product): void {
-        const cartId = localStorage.getItem('cartId');
-        if (!cartId) {
-            this.shoppingCartService.add().then(result => {
-                localStorage.setItem('cartId', result.id);
 
-                // Add Product to Cart
-            });
-        } else {
-            // Add Product to Cart
-        }
     }
 }
