@@ -5,6 +5,7 @@ import { first, map } from 'rxjs/operators';
 import { convertSnapsDoc, convertSnapsDocItems } from './db-utils';
 import { ShoppingCartItem } from '../models/shopping-cart-item';
 import { Observable } from 'rxjs';
+import { ShoppingCart } from '../models/shopping-cart';
 
 @Injectable({
     providedIn: 'root'
@@ -21,10 +22,13 @@ export class ShoppingCartService {
         this.updateItemQuantity(product, -1);
     }
 
-    async getCart(): Promise<Observable<ShoppingCartItem[]>> {
+    async getCart(): Promise<Observable<ShoppingCart>> {
         const cartId = await this.getOrCreateCartId();
         return this.db.doc(`shopping-carts/${ cartId }`).collection('items').snapshotChanges().pipe(
-            map(snaps => convertSnapsDocItems<ShoppingCartItem>(snaps))
+            map(snaps => {
+                const items = convertSnapsDocItems<ShoppingCartItem>(snaps);
+                return new ShoppingCart(items);
+            })
         );
     }
 
