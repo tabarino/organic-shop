@@ -13,20 +13,12 @@ export class ShoppingCartService {
     constructor(private db: AngularFirestore) {
     }
 
-    async addToCart(product: Product): Promise<void> {
-        const cartId = await this.getOrCreateCartId();
-        const item$ = this.getCartItem(cartId, product.id);
-        item$.subscribe(item => {
-            let quantity = 1;
-            if (item) {
-                quantity = item.quantity + 1;
-            }
+    addToCart(product: Product): void {
+        this.updateItemQuantity(product, 1);
+    }
 
-            this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).set({
-                product,
-                quantity
-            });
-        });
+    removeFromCart(product: Product): void {
+        this.updateItemQuantity(product, -1);
     }
 
     async getCart(): Promise<Observable<ShoppingCartItem[]>> {
@@ -34,6 +26,22 @@ export class ShoppingCartService {
         return this.db.doc(`shopping-carts/${ cartId }`).collection('items').snapshotChanges().pipe(
             map(snaps => convertSnapsDocItems<ShoppingCartItem>(snaps))
         );
+    }
+
+    private async updateItemQuantity(product: Product, change: number): Promise<void> {
+        const cartId = await this.getOrCreateCartId();
+        const item$ = this.getCartItem(cartId, product.id);
+        item$.subscribe(item => {
+            let quantity = 1;
+            if (item) {
+                quantity = item.quantity + change;
+            }
+
+            this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).set({
+                product,
+                quantity
+            });
+        });
     }
 
     private async getOrCreateCartId(): Promise<string> {

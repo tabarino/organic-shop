@@ -11,6 +11,6 @@
     height: 150px;
 }
 
-#quantity {
-    margin-top: 5px;
+.col.text-center {
+    margin-top: 6px;
 }
