@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Product } from '../models/product';
 import { first, map } from 'rxjs/operators';
-import { convertSnapsDoc } from './db-utils';
+import { convertSnapsDoc, convertSnapsDocItems } from './db-utils';
 import { ShoppingCartItem } from '../models/shopping-cart-item';
 import { Observable } from 'rxjs';
 
@@ -27,6 +27,13 @@ export class ShoppingCartService {
                 quantity
             });
         });
+    }
+
+    async getCart(): Promise<Observable<ShoppingCartItem[]>> {
+        const cartId = await this.getOrCreateCartId();
+        return this.db.doc(`shopping-carts/${ cartId }`).collection('items').snapshotChanges().pipe(
+            map(snaps => convertSnapsDocItems<ShoppingCartItem>(snaps))
+        );
     }
 
     private async getOrCreateCartId(): Promise<string> {

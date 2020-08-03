@@ -10,3 +10,15 @@ export function convertSnaps<T>(snaps): T[] {
 export function convertSnapsDoc<T>(snaps): T {
     return snaps.payload.data();
 }
+
+export function convertSnapsDocItems<T>(snaps): T[] {
+    const items = [];
+    snaps.forEach(snap => {
+        items.push({
+            id: snap.payload.doc.id,
+            ...snap.payload.doc.data() as T
+        });
+    });
+
+    return items;
+}
