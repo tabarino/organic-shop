@@ -6,9 +6,7 @@ export class ShoppingCart {
 
     constructor(public itemsMap: ShoppingCartItem[]) {
         for (const item of itemsMap) {
-            const shoppingCartItem = new ShoppingCartItem();
-            Object.assign(shoppingCartItem, item);
-            this.items.push(shoppingCartItem);
+            this.items.push(new ShoppingCartItem({ ...item }));
         }
     }
 
