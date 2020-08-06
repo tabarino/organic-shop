@@ -15,11 +15,11 @@ export class ShoppingCartService {
     }
 
     addToCart(product: Product): void {
-        this.updateItemQuantity(product, 1);
+        this.updateItem(product, 1);
     }
 
     removeFromCart(product: Product): void {
-        this.updateItemQuantity(product, -1);
+        this.updateItem(product, -1);
     }
 
     async getCart(): Promise<Observable<ShoppingCart>> {
@@ -32,7 +32,7 @@ export class ShoppingCartService {
         );
     }
 
-    private async updateItemQuantity(product: Product, change: number): Promise<void> {
+    private async updateItem(product: Product, change: number): Promise<void> {
         const cartId = await this.getOrCreateCartId();
         const item$ = this.getCartItem(cartId, product.id);
         item$.subscribe(item => {
@@ -42,7 +42,9 @@ export class ShoppingCartService {
             }
 
             this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).set({
-                product,
+                title: product.title,
+                price: product.price,
+                imageUrl: product.imageUrl,
                 quantity
             });
         });

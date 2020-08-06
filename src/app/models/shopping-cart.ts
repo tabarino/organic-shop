@@ -6,12 +6,14 @@ export class ShoppingCart {
 
     constructor(public itemsMap: ShoppingCartItem[]) {
         for (const item of itemsMap) {
-            this.items.push(new ShoppingCartItem(item.product, item.quantity));
+            const shoppingCartItem = new ShoppingCartItem();
+            Object.assign(shoppingCartItem, item);
+            this.items.push(shoppingCartItem);
         }
     }
 
     getQuantity(product: Product): number {
-        const cartItem = this.items.filter(item => item.product.id === product.id).shift();
+        const cartItem = this.items.filter(item => item.id === product.id).shift();
         return cartItem ? cartItem.quantity : 0;
     }
 

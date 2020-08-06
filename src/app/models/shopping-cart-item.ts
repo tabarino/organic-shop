@@ -1,10 +1,11 @@
-import { Product } from './product';
-
 export class ShoppingCartItem {
-    constructor(public product: Product, public quantity: number) {
-    }
+    id: string;
+    title: string;
+    price: number;
+    imageUrl: string;
+    quantity: number;
 
     get totalPrice(): number {
-        return this.product.price * this.quantity;
+        return this.price * this.quantity;
     }
 }
