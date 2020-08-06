@@ -1,19 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/product';
-import { ShoppingCartService } from '../services/shopping-cart.service';
 import { ShoppingCart } from '../models/shopping-cart';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
-    selector: 'product-card',
-    templateUrl: './product-card.component.html',
-    styleUrls: ['./product-card.component.css']
+    selector: 'product-quantity',
+    templateUrl: './product-quantity.component.html',
+    styleUrls: ['./product-quantity.component.css']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductQuantityComponent implements OnInit {
     @Input()
     product: Product;
-
-    @Input()
-    showActions = true;
 
     @Input()
     shoppingCart: ShoppingCart;
@@ -26,5 +23,9 @@ export class ProductCardComponent implements OnInit {
 
     addToCart(): void {
         this.cartService.addToCart(this.product);
+    }
+
+    removeFromCart(): void {
+        this.cartService.removeFromCart(this.product);
     }
 }
