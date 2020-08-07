@@ -4,8 +4,8 @@ import { Product } from './product';
 export class ShoppingCart {
     items: ShoppingCartItem[] = [];
 
-    constructor(public itemsMap: ShoppingCartItem[]) {
-        for (const item of itemsMap) {
+    constructor(private itemsMap: ShoppingCartItem[]) {
+        for (const item of this.itemsMap) {
             this.items.push(new ShoppingCartItem({ ...item }));
         }
     }
