@@ -1,1 +1,38 @@
-<p>check-out works!</p>
+<h2>Shipping</h2>
+<form #shippingForm="ngForm">
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input #name="ngModel" [(ngModel)]="shipping.name" name="name" id="name" type="text" class="form-control"
+            required>
+        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+            Name is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input #address="ngModel" [(ngModel)]="shipping.address" name="address" id="address" type="text"
+            class="form-control" required>
+        <div class="alert alert-danger" *ngIf="address.touched && address.invalid">
+            Address is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="city">City</label>
+        <input #city="ngModel" [(ngModel)]="shipping.city" name="city" id="city" type="text" class="form-control"
+            required>
+        <div class="alert alert-danger" *ngIf="city.touched && city.invalid">
+            City is required.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="postcode">Postal Code</label>
+        <input #postcode="ngModel" [(ngModel)]="shipping.postcode" name="postcode" id="postcode" type="text"
+            class="form-control" required>
+        <div class="alert alert-danger" *ngIf="postcode.touched && postcode.invalid">
+            Postal Code is required.
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="placeOrder()" [disabled]="shippingForm.invalid">
+        Place Order
+    </button>
+</form>
