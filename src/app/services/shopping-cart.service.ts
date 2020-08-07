@@ -48,12 +48,16 @@ export class ShoppingCartService {
                 quantity = item.quantity + change;
             }
 
-            this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).set({
-                title: product.title,
-                price: product.price,
-                imageUrl: product.imageUrl,
-                quantity
-            });
+            if (quantity === 0) {
+                this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).delete();
+            } else {
+                this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(product.id).set({
+                    title: product.title,
+                    price: product.price,
+                    imageUrl: product.imageUrl,
+                    quantity
+                });
+            }
         });
     }
 
