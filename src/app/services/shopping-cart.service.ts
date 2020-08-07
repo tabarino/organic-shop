@@ -22,6 +22,13 @@ export class ShoppingCartService {
         this.updateItem(product, -1);
     }
 
+    async clearCart(items: ShoppingCartItem[]): Promise<void> {
+        const cartId = await this.getOrCreateCartId();
+        items.forEach(item => {
+            this.db.doc(`shopping-carts/${ cartId }`).collection('items').doc(item.id).delete();
+        });
+    }
+
     async getCart(): Promise<Observable<ShoppingCart>> {
         const cartId = await this.getOrCreateCartId();
         return this.db.doc(`shopping-carts/${ cartId }`).collection('items').snapshotChanges().pipe(
