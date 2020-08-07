@@ -34,5 +34,10 @@
         </tr>
         </tfoot>
     </table>
-    <button (click)="clearCart(cart)" class="btn btn-danger btn-sm">Clear Shopping Cart</button>
+    <div class="d-flex justify-content-between bd-highlight mb-2">
+        <button *ngIf="cart.items.length" (click)="clearCart(cart)" class="btn btn-light btn-sm">
+            Clear Shopping Cart
+        </button>
+        <a *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">Check Out</a>
+    </div>
 </ng-container>
