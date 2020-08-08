@@ -6,6 +6,7 @@ import { ShoppingCart } from '../models/shopping-cart';
 import { OrderService } from '../services/order.service';
 import { Order } from '../models/order';
 import { OrderItem } from '../models/order-item';
+import { AuthService } from '../services/auth.service';
 
 @Component({
     selector: 'app-check-out',
@@ -13,8 +14,10 @@ import { OrderItem } from '../models/order-item';
     styleUrls: ['./check-out.component.css']
 })
 export class CheckOutComponent implements OnInit, OnDestroy {
+    userId: string;
     cart: ShoppingCart;
-    subscription: Subscription;
+    cartSubscription: Subscription;
+    userSubscription: Subscription;
     shipping: Shipping = {
         name: null,
         address: null,
@@ -23,6 +26,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     };
 
     constructor(
+        private authService: AuthService,
         private cartService: ShoppingCartService,
         private orderService: OrderService
     ) {
@@ -30,12 +34,14 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
     async ngOnInit(): Promise<void> {
         const cart$ = await this.cartService.getCart();
-        this.subscription = cart$.subscribe(cart => this.cart = cart);
+        this.cartSubscription = cart$.subscribe(cart => this.cart = cart);
+        this.userSubscription = this.authService.user$.subscribe(user => this.userId = user.uid);
     }
 
     placeOrder(): void {
         const orderItems = this.getOrderItems();
         const order: Order = {
+            userId: this.userId,
             datePlaced: new Date().getTime(),
             shipping: this.shipping,
             items: orderItems
@@ -57,6 +63,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        this.cartSubscription.unsubscribe();
+        this.userSubscription.unsubscribe();
     }
 }
