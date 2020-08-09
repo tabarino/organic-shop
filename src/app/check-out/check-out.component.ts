@@ -39,27 +39,8 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     }
 
     placeOrder(): void {
-        const orderItems = this.getOrderItems();
-        const order: Order = {
-            userId: this.userId,
-            datePlaced: new Date().getTime(),
-            shipping: this.shipping,
-            items: orderItems
-        };
-
-        this.orderService.storeOrder(order);
-    }
-
-    private getOrderItems(): OrderItem[] {
-        return this.cart.items.map(item => {
-            return {
-                title: item.title,
-                imageUrl: item.imageUrl,
-                price: item.price,
-                quantity: item.quantity,
-                totalPrice: item.totalPrice
-            };
-        });
+        const order = new Order(this.userId, this.shipping, this.cart);
+        this.orderService.storeOrder({ ...order });
     }
 
     ngOnDestroy(): void {
