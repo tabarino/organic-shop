@@ -21,6 +21,8 @@ export class ProductService {
      * The first item always returns the cached list
      * According to some articles, it seems to be a bug on Firebase
      * That's the reason to be using take(2)
+     *
+     * Not using the take(2) here anymore, because we are unsubscribring later
      */
     getAll(): Observable<Product[]> {
         return this.db.collection(

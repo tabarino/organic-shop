@@ -1,1 +1,19 @@
-<p>admin-orders works!</p>
+<h2>Orders</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Customer</th>
+        <th scope="col">City</th>
+        <th scope="col">Postal Code</th>
+        <th scope="col">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders$ | async">
+        <td>{{ order.shipping.name }}</td>
+        <td>{{ order.shipping.city }}</td>
+        <td>{{ order.shipping.postcode }}</td>
+        <td>{{ order.datePlaced | date:'d/M/yyyy, H:mm' }}</td>
+    </tr>
+    </tbody>
+</table>
