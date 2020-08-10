@@ -15,7 +15,10 @@ export class OrderService {
 
     async placeOrder(order: Order, cart: ShoppingCart): Promise<any> {
         const result = await this.db.collection('orders').add(order);
-        this.cartService.clearCart(cart.items);
+
+        if (result.id) {
+            this.cartService.clearCart(cart.items);
+        }
 
         return result;
     }
