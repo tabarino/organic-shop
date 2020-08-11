@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Product } from '../models/product';
+import { Product } from '@shared/models/product';
 import { convertSnaps, convertSnapsDoc } from './db-utils';
 import { first, map } from 'rxjs/operators';
 

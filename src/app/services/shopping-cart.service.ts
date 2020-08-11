@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Product } from '../models/product';
+import { Product } from '@shared/models/product';
 import { first, map } from 'rxjs/operators';
 import { convertSnapsDoc, convertSnapsDocItems } from './db-utils';
-import { ShoppingCartItem } from '../models/shopping-cart-item';
+import { ShoppingCartItem } from '@shared/models/shopping-cart-item';
 import { Observable } from 'rxjs';
-import { ShoppingCart } from '../models/shopping-cart';
+import { ShoppingCart } from '@shared/models/shopping-cart';
 
 @Injectable({
     providedIn: 'root'

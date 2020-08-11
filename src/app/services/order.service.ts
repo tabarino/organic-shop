@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Order } from '../models/order';
+import { Order } from '@shared/models/order';
 import { ShoppingCartService } from './shopping-cart.service';
-import { ShoppingCart } from '../models/shopping-cart';
+import { ShoppingCart } from '@shared/models/shopping-cart';
 import { Observable } from 'rxjs';
 import { convertSnaps } from './db-utils';
 import { map } from 'rxjs/operators';

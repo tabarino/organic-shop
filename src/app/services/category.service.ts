@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { first, map } from 'rxjs/operators';
 import { convertSnaps } from './db-utils';
-import { Category } from '../models/category';
+import { Category } from '@shared/models/category';
 import { Observable } from 'rxjs';
 
 @Injectable({
