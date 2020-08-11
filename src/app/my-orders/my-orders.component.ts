@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '@shared/models/order';
-import { AuthService } from '../services/auth.service';
-import { OrderService } from '../services/order.service';
+import { AuthService } from '@shared/services/auth.service';
+import { OrderService } from '@shared/services/order.service';
 import { switchMap } from 'rxjs/operators';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CategoryService } from '../../services/category.service';
+import { CategoryService } from '@shared/services/category.service';
 import { Observable } from 'rxjs';
 import { Category } from '@shared/models/category';
 

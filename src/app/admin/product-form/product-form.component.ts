@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../services/category.service';
+import { CategoryService } from '@shared/services/category.service';
 import { Observable } from 'rxjs';
 import { Category } from '@shared/models/category';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '@shared/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '@shared/models/product';
 
