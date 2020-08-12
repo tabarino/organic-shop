@@ -19,6 +19,9 @@
         "paths": {
             "@shared/*": [
                 "app/shared/*"
+            ],
+            "@admin/*": [
+                "app/admin/*"
             ]
         }
     }
