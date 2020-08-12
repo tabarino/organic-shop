@@ -17,11 +17,14 @@
             "dom"
         ],
         "paths": {
+            "@admin/*": [
+                "app/admin/*"
+            ],
             "@shared/*": [
                 "app/shared/*"
             ],
-            "@admin/*": [
-                "app/admin/*"
+            "@shopping/*": [
+                "app/shopping/*"
             ]
         }
     }

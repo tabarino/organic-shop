@@ -4,7 +4,7 @@ import { Product } from '@shared/models/product';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-admin-products',
+    selector: 'admin-products',
     templateUrl: './admin-products.component.html',
     styleUrls: ['./admin-products.component.css']
 })

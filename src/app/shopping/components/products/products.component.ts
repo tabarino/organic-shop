@@ -8,7 +8,7 @@ import { ShoppingCart } from '@shared/models/shopping-cart';
 import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-products',
+    selector: 'products',
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.css']
 })

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { OrderService } from '@shared/services/order.service';
 
 @Component({
-    selector: 'app-admin-orders',
+    selector: 'admin-orders',
     templateUrl: './admin-orders.component.html',
     styleUrls: ['./admin-orders.component.css']
 })

@@ -6,7 +6,7 @@ import { OrderService } from '@shared/services/order.service';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-my-orders',
+    selector: 'my-orders',
     templateUrl: './my-orders.component.html',
     styleUrls: ['./my-orders.component.css']
 })

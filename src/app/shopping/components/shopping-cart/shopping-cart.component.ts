@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { ShoppingCart } from '@shared/models/shopping-cart';
 
 @Component({
-    selector: 'app-shopping-cart',
+    selector: 'shopping-cart',
     templateUrl: './shopping-cart.component.html',
     styleUrls: ['./shopping-cart.component.css']
 })
