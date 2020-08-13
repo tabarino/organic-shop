@@ -13,17 +13,15 @@ import { ShoppingCartComponent } from '@shopping/components/shopping-cart/shoppi
 import { CheckOutComponent } from '@shopping/components/check-out/check-out.component';
 import { OrderSuccessComponent } from '@shopping/components/order-success/order-success.component';
 import { MyOrdersComponent } from '@shopping/components/my-orders/my-orders.component';
-import { AdminProductsComponent } from '@admin/components/admin-products/admin-products.component';
-import { AdminOrdersComponent } from '@admin/components/admin-orders/admin-orders.component';
 import { LoginComponent } from '@core/components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProductFormComponent } from '@admin/components/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductFilterComponent } from '@shopping/components/products/product-filter/product-filter.component';
 import { ShoppingCartSummaryComponent } from '@shopping/components/shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from '@shopping/components/shipping-form/shipping-form.component';
 import { SharedModule } from '@shared/shared.module';
+import { AdminModule } from '@admin/admin.module';
 
 @NgModule({
     declarations: [
@@ -35,10 +33,7 @@ import { SharedModule } from '@shared/shared.module';
         CheckOutComponent,
         OrderSuccessComponent,
         MyOrdersComponent,
-        AdminProductsComponent,
-        AdminOrdersComponent,
         LoginComponent,
-        ProductFormComponent,
         ProductFilterComponent,
         ShoppingCartSummaryComponent,
         ShippingFormComponent
@@ -52,7 +47,8 @@ import { SharedModule } from '@shared/shared.module';
         NgbModule,
         FormsModule,
         CustomFormsModule,
-        SharedModule
+        SharedModule,
+        AdminModule
     ],
     providers: [],
     bootstrap: [AppComponent]
