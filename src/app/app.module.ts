@@ -21,11 +21,9 @@ import { ProductFormComponent } from '@admin/components/product-form/product-for
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductFilterComponent } from '@shopping/components/products/product-filter/product-filter.component';
-import { ProductCardComponent } from '@shared/components/product-card/product-card.component';
-import { ProductQuantityComponent } from '@shared/components/product-quantity/product-quantity.component';
 import { ShoppingCartSummaryComponent } from '@shopping/components/shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from '@shopping/components/shipping-form/shipping-form.component';
-
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -42,8 +40,6 @@ import { ShippingFormComponent } from '@shopping/components/shipping-form/shippi
         LoginComponent,
         ProductFormComponent,
         ProductFilterComponent,
-        ProductCardComponent,
-        ProductQuantityComponent,
         ShoppingCartSummaryComponent,
         ShippingFormComponent
     ],
@@ -55,7 +51,8 @@ import { ShippingFormComponent } from '@shopping/components/shipping-form/shippi
         AngularFirestoreModule,
         NgbModule,
         FormsModule,
-        CustomFormsModule
+        CustomFormsModule,
+        SharedModule
     ],
     providers: [],
     bootstrap: [AppComponent]
