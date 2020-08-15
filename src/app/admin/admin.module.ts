@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
@@ -14,9 +12,7 @@ import { AdminRoutingModule } from './admin-routing.module';
         ProductFormComponent
     ],
     imports: [
-        CommonModule,
         AdminRoutingModule,
-        FormsModule,
         SharedModule
     ]
 })
